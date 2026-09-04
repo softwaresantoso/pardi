@@ -1,4 +1,4 @@
-const CACHE_NAME = 'pardi-shell-v1';
+const CACHE_NAME = 'pardi-shell-v2';
 const APP_SHELL = [
   '/',
   '/index.html',
@@ -30,20 +30,36 @@ self.addEventListener('activate', (event) => {
   self.clients.claim();
 });
 
-// Cache-first for app shell assets, network-first fallback for everything else
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
 
-  event.respondWith(
-    caches.match(event.request).then((cached) => {
-      if (cached) return cached;
-      return fetch(event.request)
+  // Page navigations: always try the network first so content updates show up
+  // immediately after a redeploy. Only fall back to cache when offline.
+  if (event.request.mode === 'navigate') {
+    event.respondWith(
+      fetch(event.request)
         .then((response) => {
           const copy = response.clone();
           caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));
           return response;
         })
-        .catch(() => caches.match('/index.html'));
+        .catch(() => caches.match(event.request).then((cached) => cached || caches.match('/index.html')))
+    );
+    return;
+  }
+
+  // Static assets (css/js/images/icons): serve from cache instantly, then
+  // refresh the cache in the background so the next load picks up changes.
+  event.respondWith(
+    caches.match(event.request).then((cached) => {
+      const network = fetch(event.request)
+        .then((response) => {
+          const copy = response.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));
+          return response;
+        })
+        .catch(() => cached);
+      return cached || network;
     })
   );
 });
