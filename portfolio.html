@@ -11,7 +11,7 @@
 <link rel="icon" href="assets/icons/favicon-32.png" sizes="32x32">
 <link rel="stylesheet" href="assets/css/style.css">
 <style>
-  .mock-ui{position:absolute; inset:0; padding:22px;}
+  .mock-ui{position:static; padding:22px;}
   .mock-bar{height:9px; border-radius:5px; background:rgba(255,255,255,.16);}
   .mock-bar.w60{width:60%;} .mock-bar.w40{width:40%;} .mock-bar.w80{width:80%;}
   .mock-row{display:flex; gap:10px; margin-top:14px;}
@@ -58,53 +58,53 @@
       <div class="folio-grid">
 
         <div class="folio-card">
-          <div class="folio-visual">
+          <div class="folio-visual" style="aspect-ratio:auto; min-height:0; height:auto;">
             <div class="mock-ui">
               <div class="mock-bar w40"></div>
               <div class="mock-row">
-                <div class="mock-box"><div class="n">Rp 1,2jt</div><div class="l">Penjualan hari ini</div></div>
-                <div class="mock-box"><div class="n">86</div><div class="l">Transaksi</div></div>
+                <div class="mock-box"><div class="n">Rp 1,8jt</div><div class="l">Penjualan hari ini</div></div>
+                <div class="mock-box"><div class="n">12</div><div class="l">Produsen aktif</div></div>
               </div>
               <div class="mock-list">
-                <div class="li"><span>Keripik singkong pedas</span><span>Rp 12rb</span></div>
-                <div class="li"><span>Basreng original</span><span>Rp 15rb</span></div>
-                <div class="li"><span>Makaroni pedas manis</span><span>Rp 10rb</span></div>
+                <div class="li"><span>Bu Sari — titipan baru</span><span>18 item</span></div>
+                <div class="li"><span>Pak Joko — retur</span><span>3 item</span></div>
+                <div class="li"><span>Bu Rina — siap dibayar</span><span>Rp 240rb</span></div>
               </div>
-              <span class="mock-chip">Stok menipis: 2 item</span>
+              <span class="mock-chip">Tutup hari: rekap otomatis</span>
             </div>
           </div>
           <div class="folio-body">
             <div class="folio-kicker">Laris Snack</div>
-            <h3>Sistem kasir &amp; manajemen stok</h3>
-            <p>Dibangun untuk Laris Snack, usaha ritel harian: pencatatan transaksi di kasir, pemantauan stok otomatis berkurang tiap transaksi, dan laporan penjualan harian/bulanan untuk pemilik usaha.</p>
+            <h3>Sistem kasir &amp; titipan multi-produsen</h3>
+            <p>Laris Snack menjalankan model lapak titipan (consignment) dari banyak produsen snack rumahan. Sebelumnya pencatatan titipan, penjualan, dan pembayaran ke tiap produsen dilakukan manual dan sering selisih. Sekarang setiap produsen bisa login sendiri untuk input titipan hariannya, sementara sistem menangani transaksi kasir, tutup hari, retur, sampai perhitungan pembayaran produsen secara otomatis.</p>
             <div class="folio-tags">
-              <span>Kasir</span><span>Manajemen stok</span><span>Laporan penjualan</span>
+              <span>Multi-produsen</span><span>Tutup hari &amp; retur</span><span>Pembayaran produsen</span>
             </div>
           </div>
         </div>
 
         <div class="folio-card">
-          <div class="folio-visual">
+          <div class="folio-visual" style="aspect-ratio:auto; min-height:0; height:auto;">
             <div class="mock-ui">
               <div class="mock-bar w60"></div>
               <div class="mock-row">
-                <div class="mock-box"><div class="n">14</div><div class="l">Pesanan minggu ini</div></div>
-                <div class="mock-box"><div class="n">92%</div><div class="l">Antar tepat waktu</div></div>
+                <div class="mock-box"><div class="n">32</div><div class="l">Pesanan minggu ini</div></div>
+                <div class="mock-box"><div class="n">5</div><div class="l">Afiliator aktif</div></div>
               </div>
               <div class="mock-list">
-                <div class="li"><span>Sabtu, 18.00 — Pizza Pepperoni</span><span>Terkonfirmasi</span></div>
-                <div class="li"><span>Sabtu, 19.30 — Pizza BBQ</span><span>Menunggu</span></div>
-                <div class="li"><span>Minggu, 12.00 — Pizza Keju</span><span>Terkonfirmasi</span></div>
+                <div class="li"><span>Pizza Pepperoni (L)</span><span>Rp 85rb</span></div>
+                <div class="li"><span>Pizza BBQ (M)</span><span>Rp 65rb</span></div>
+                <div class="li"><span>Link afiliator: budi92</span><span>6 pesanan</span></div>
               </div>
-              <span class="mock-chip">Pre-order baru masuk</span>
+              <span class="mock-chip">Checkout otomatis aktif</span>
             </div>
           </div>
           <div class="folio-body">
             <div class="folio-kicker">Santoso Pizza Delivery</div>
-            <h3>Sistem pemesanan &amp; pre-order</h3>
-            <p>Dibangun untuk Santoso Pizza Delivery, usaha berbasis pesanan: pelanggan pre-order dan pilih jadwal antar dari HP, pemilik usaha kelola pesanan masuk dan status antar dari satu dashboard.</p>
+            <h3>Sistem checkout online &amp; link afiliator</h3>
+            <p>Sebelumnya pesanan Santoso Pizza Delivery masuk lewat WhatsApp manual — pelanggan harus diberi pricelist dulu satu per satu, prosesnya lama. Sekarang pelanggan checkout sendiri dari tampilan menu yang jelas. Sistemnya juga bisa dikustom jadi link afiliator per orang, jadi siapa pun bisa bantu jualan dan pesanan tetap tercatat rapi dari mana asalnya.</p>
             <div class="folio-tags">
-              <span>Pre-order</span><span>Jadwal antar</span><span>Notifikasi otomatis</span>
+              <span>Checkout otomatis</span><span>Link afiliator</span><span>Menu online</span>
             </div>
           </div>
         </div>
