@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portfolio — Pardi</title>
+<meta name="description" content="Dua aplikasi yang sudah dibangun Pardi untuk UMKM: sistem kasir & stok, dan sistem booking & pre-order.">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#142560">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+<link rel="icon" href="assets/icons/favicon-32.png" sizes="32x32">
+<link rel="stylesheet" href="assets/css/style.css">
+<style>
+  .mock-ui{position:absolute; inset:0; padding:22px;}
+  .mock-bar{height:9px; border-radius:5px; background:rgba(255,255,255,.16);}
+  .mock-bar.w60{width:60%;} .mock-bar.w40{width:40%;} .mock-bar.w80{width:80%;}
+  .mock-row{display:flex; gap:10px; margin-top:14px;}
+  .mock-box{flex:1; background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.16); border-radius:10px; height:64px; padding:10px;}
+  .mock-box .n{font-family:'Sora',sans-serif; font-weight:700; color:#fff; font-size:1rem;}
+  .mock-box .l{color:rgba(255,255,255,.6); font-size:.68rem; margin-top:4px;}
+  .mock-list{margin-top:14px; display:flex; flex-direction:column; gap:8px;}
+  .mock-list .li{display:flex; justify-content:space-between; align-items:center; background:rgba(255,255,255,.08); border-radius:8px; padding:9px 12px;}
+  .mock-list .li span:first-child{color:rgba(255,255,255,.85); font-size:.78rem;}
+  .mock-list .li span:last-child{color:#F2C185; font-size:.78rem; font-weight:600;}
+  .mock-chip{display:inline-flex; padding:5px 11px; border-radius:999px; background:rgba(217,118,6,.85); color:#fff; font-size:.7rem; font-weight:600; margin-top:14px;}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap nav">
+    <a href="index.html" class="nav-logo"><img src="assets/img/logo-pardi-navy.png" alt="Pardi"></a>
+    <nav class="nav-links" id="nav-links">
+      <a href="index.html">Beranda</a>
+      <a href="layanan.html">Layanan</a>
+      <a href="portfolio.html" aria-current="page">Portfolio</a>
+      <a href="kontak.html">Kontak</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-outline" href="kontak.html">Konsultasi</a>
+      <a class="btn btn-primary" href="https://wa.me/6281200000000" target="_blank" rel="noopener">Chat WhatsApp</a>
+      <button class="nav-toggle" aria-label="Buka menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section class="page-hero">
+    <div class="wrap">
+      <h1>Dua alur bisnis, satu fondasi yang sama</h1>
+      <p>Ini contoh sistem yang sudah kami bangun. Ilustrasi di bawah menggambarkan struktur tampilannya — bukan tangkapan layar asli.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="folio-grid">
+
+        <div class="folio-card">
+          <div class="folio-visual">
+            <div class="mock-ui">
+              <div class="mock-bar w40"></div>
+              <div class="mock-row">
+                <div class="mock-box"><div class="n">Rp 1,2jt</div><div class="l">Penjualan hari ini</div></div>
+                <div class="mock-box"><div class="n">86</div><div class="l">Transaksi</div></div>
+              </div>
+              <div class="mock-list">
+                <div class="li"><span>Kopi susu gula aren</span><span>Rp 18rb</span></div>
+                <div class="li"><span>Ayam geprek</span><span>Rp 22rb</span></div>
+                <div class="li"><span>Es teh manis</span><span>Rp 5rb</span></div>
+              </div>
+              <span class="mock-chip">Stok menipis: 2 item</span>
+            </div>
+          </div>
+          <div class="folio-body">
+            <div class="folio-kicker">Contoh karya 01</div>
+            <h3>Sistem kasir &amp; manajemen stok</h3>
+            <p>Dibangun untuk usaha ritel harian: pencatatan transaksi di kasir, pemantauan stok otomatis berkurang tiap transaksi, dan laporan penjualan harian/bulanan untuk pemilik usaha.</p>
+            <div class="folio-tags">
+              <span>Kasir</span><span>Manajemen stok</span><span>Laporan penjualan</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="folio-card">
+          <div class="folio-visual">
+            <div class="mock-ui">
+              <div class="mock-bar w60"></div>
+              <div class="mock-row">
+                <div class="mock-box"><div class="n">14</div><div class="l">Booking minggu ini</div></div>
+                <div class="mock-box"><div class="n">92%</div><div class="l">Slot terisi</div></div>
+              </div>
+              <div class="mock-list">
+                <div class="li"><span>Sabtu, 10.00 — Rina</span><span>Terkonfirmasi</span></div>
+                <div class="li"><span>Sabtu, 13.00 — Dimas</span><span>Menunggu</span></div>
+                <div class="li"><span>Minggu, 09.00 — Fira</span><span>Terkonfirmasi</span></div>
+              </div>
+              <span class="mock-chip">Pre-order baru masuk</span>
+            </div>
+          </div>
+          <div class="folio-body">
+            <div class="folio-kicker">Contoh karya 02</div>
+            <h3>Sistem booking &amp; pre-order</h3>
+            <p>Dibangun untuk usaha berbasis jadwal: pelanggan pilih slot atau pre-order dari HP, pemilik usaha kelola jadwal dan pesanan masuk dari satu dashboard.</p>
+            <div class="folio-tags">
+              <span>Booking slot</span><span>Pre-order</span><span>Notifikasi otomatis</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <p class="muted" style="margin-top:28px; font-size:.88rem;">Nama klien dan tangkapan layar asli tersedia saat konsultasi langsung.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="cta-banner">
+        <h2>Alur usahamu beda dari dua contoh ini?</h2>
+        <p>Wajar — setiap usaha punya cara kerja sendiri. Ceritakan ke kami, kami sesuaikan.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="https://wa.me/6281200000000" target="_blank" rel="noopener">Chat via WhatsApp</a>
+          <a class="btn btn-outline on-dark" href="kontak.html">Isi form kontak</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-logo">
+        <img src="assets/img/logo-pardi-navy.png" alt="Pardi">
+        <p class="muted" style="max-width:32ch; font-size:.9rem;">Partner digitalisasi UMKM — aplikasi PWA yang siap pakai, tanpa ribet.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Halaman</h4>
+          <a href="index.html">Beranda</a>
+          <a href="layanan.html">Layanan</a>
+          <a href="portfolio.html">Portfolio</a>
+          <a href="kontak.html">Kontak</a>
+        </div>
+        <div class="footer-col">
+          <h4>Kontak</h4>
+          <a href="https://wa.me/6281200000000" target="_blank" rel="noopener">WhatsApp</a>
+          <a href="mailto:hello@pardi.id">hello@pardi.id</a>
+          <a href="#">Instagram</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Pardi. Semua hak dilindungi.</span>
+      <span>Dibuat sebagai partner digitalisasi UMKM.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
