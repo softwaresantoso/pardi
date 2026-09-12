@@ -1,12 +1,14 @@
-const CACHE_NAME = 'pardi-shell-v2';
+const CACHE_NAME = 'pardi-shell-v3';
 const APP_SHELL = [
   '/',
   '/index.html',
   '/layanan.html',
   '/portfolio.html',
   '/kontak.html',
+  '/afiliator.html',
   '/assets/css/style.css',
   '/assets/js/main.js',
+  '/assets/js/affiliate.js',
   '/assets/img/logo-pardi-navy.png',
   '/assets/img/logo-pardi-white.png',
   '/assets/icons/icon-192.png',
