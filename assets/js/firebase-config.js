@@ -5,12 +5,12 @@
 // Ganti seluruh objek ini dengan config dari Firebase Console:
 // Project Settings -> General -> Your apps -> SDK setup and configuration
 const firebaseConfig = {
-  apiKey: "GANTI_DENGAN_API_KEY",
-  authDomain: "GANTI.firebaseapp.com",
-  projectId: "GANTI_PROJECT_ID",
-  storageBucket: "GANTI.appspot.com",
-  messagingSenderId: "GANTI_SENDER_ID",
-  appId: "GANTI_APP_ID",
+  apiKey: AIzaSyA9AFH3mVS75Gg7JFSfLqcYSZXL4Kr8RpU,
+  authDomain: pardi-website.firebaseapp.com,
+  projectId: pardi-website,
+  storageBucket: pardi-website.firebasestorage.app,
+  messagingSenderId: 511902184335,
+  appId: 1:511902184335:web:3ad7b2f1a372d5941ad1fa,
 };
 
 firebase.initializeApp(firebaseConfig);
