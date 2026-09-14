@@ -8,7 +8,7 @@ const firebaseConfig = {
   storageBucket: "pardi-website.firebasestorage.app",
   messagingSenderId: "511902184335",
   appId: "1:511902184335:web:3ad7b2f1a372d5941ad1fa",
-};
+}
 
 firebase.initializeApp(firebaseConfig);
 const affAuth = firebase.auth();
