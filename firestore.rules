@@ -3,37 +3,41 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
+    function isAdmin() {
+      return request.auth != null &&
+        exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    // ---------- Admin membership ----------
+    match /admins/{uid} {
+      allow read: if request.auth != null && request.auth.uid == uid;
+      allow write: if false;
+    }
+
     // ---------- Afiliator ----------
     match /affiliates/{uid} {
       allow create: if request.auth != null && request.auth.uid == uid;
-      allow read, update: if request.auth != null && request.auth.uid == uid;
+      allow read, update: if (request.auth != null && request.auth.uid == uid) || isAdmin();
       allow delete: if false;
     }
 
     // ---------- Referral dari form kontak (kontak.html) ----------
     match /referrals/{id} {
-      // Pengunjung website belum tentu login, jadi create dibuka publik.
-      // Catatan: ini berarti tidak ada validasi anti-spam otomatis di sisi
-      // rules — kalau nanti disalahgunakan, pertimbangkan tambah App Check
-      // atau reCAPTCHA di form kontak.
       allow create: if true;
-
-      // Afiliator cuma boleh baca referral yang kode-nya sama dengan kode
-      // miliknya sendiri.
-      allow read: if request.auth != null &&
-        get(/databases/$(database)/documents/affiliates/$(request.auth.uid)).data.code == resource.data.code;
-
-      // Update status/komisi sengaja hanya lewat Firebase Console (Admin SDK
-      // melewati rules ini), supaya afiliator tidak bisa ubah status closing
-      // atau nominal komisi sendiri.
-      allow update, delete: if false;
+      allow read: if isAdmin() || (
+        request.auth != null &&
+        get(/databases/$(database)/documents/affiliates/$(request.auth.uid)).data.code == resource.data.code
+      );
+      allow update: if isAdmin();
+      allow delete: if false;
     }
 
     // ---------- Permintaan pencairan komisi ----------
     match /payoutRequests/{id} {
       allow create: if request.auth != null && request.auth.uid == request.resource.data.uid;
-      allow read: if request.auth != null && request.auth.uid == resource.data.uid;
-      allow update, delete: if false;
+      allow read: if isAdmin() || (request.auth != null && request.auth.uid == resource.data.uid);
+      allow update: if isAdmin();
+      allow delete: if false;
     }
   }
 }
