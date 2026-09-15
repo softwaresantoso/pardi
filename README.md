@@ -28,13 +28,30 @@ Halaman `afiliator.html` dan form `kontak.html` (untuk tracking referral) butuh 
 1. Calon afiliator buka `afiliator.html` → Daftar (nama, email, password) → otomatis dapat kode referral (contoh: `AFF-BUDI47`)
 2. Dari dashboard, afiliator salin link referralnya (`kontak.html?ref=AFF-BUDI47`) dan bagikan
 3. Kalau ada calon klien isi form kontak lewat link itu, otomatis tercatat di koleksi Firestore `referrals` dengan kode afiliator tsb
-4. **Kamu perlu update status referral secara manual** lewat Firebase Console (`referrals/{id}` → ubah field `status` jadi `proses`/`closing`/`batal`, dan isi `commissionAmount` saat closing) — belum ada panel admin otomatis
+4. Status referral bisa diupdate langsung dari **Panel Admin** (`admin.html`) — lihat cara setup di bawah
 5. Afiliator lihat status & komisi closing-nya langsung di dashboard, dan bisa tekan "Minta Pencairan" (mengirim WA ke kamu + mencatat permintaan di koleksi `payoutRequests`)
 
+## Setup Panel Admin (`admin.html`)
+
+Halaman ini **tidak muncul di menu navigasi publik** — sengaja disembunyikan supaya tidak mengundang pengunjung biasa. Simpan/bookmark URL-nya sendiri (misalnya `https://situspardi.com/admin.html`).
+
+**Cara mengaktifkan akun admin pertama kali:**
+1. Buat akun lewat `afiliator.html` (Daftar) pakai email kamu sendiri — atau lewat **Firebase Console → Authentication → Add user**
+2. Salin **UID** user tersebut dari Firebase Console (tab Authentication)
+3. Di **Firestore Database**, buat koleksi baru bernama `admins`, lalu buat dokumen dengan **ID = UID tadi** (isi field-nya bebas, misalnya `{ role: "owner" }`)
+4. Buka `admin.html`, login pakai email/password yang sama — sekarang seharusnya masuk ke dashboard admin
+
+**Kenapa harus manual:** supaya tidak ada jalan bagi siapa pun untuk memberi diri sendiri akses admin lewat website — akses admin sengaja hanya bisa diberikan lewat Firebase Console.
+
+**Yang bisa dilakukan dari Panel Admin:**
+- Lihat semua referral dari semua afiliator, ubah status (baru/proses/closing/batal) dan isi nominal komisi langsung dari tabel
+- Lihat semua afiliator terdaftar
+- Tandai permintaan pencairan komisi sebagai selesai
+
 **Yang masih manual (belum ada di MVP ini):**
-- Panel admin untuk update status referral (sekarang lewat Firebase Console langsung)
 - Validasi anti-spam/anti-duplikat kode referral saat daftar
-- Notifikasi otomatis ke kamu saat ada referral baru masuk (sekarang harus cek Firestore/dashboard afiliator manual)
+- Notifikasi otomatis ke kamu saat ada referral baru masuk (sekarang harus buka Panel Admin manual)
+- Multi-admin dengan level akses berbeda (sekarang semua yang ada di koleksi `admins` punya akses penuh yang sama)
 
 ## Setelah live
 - Buka situs dari HP → browser akan menawarkan "Tambahkan ke layar utama" (itu instalasi PWA-nya)

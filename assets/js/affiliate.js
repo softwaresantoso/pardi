@@ -163,7 +163,7 @@ function attachAffDashboard(uid) {
       });
       document.getElementById('aff-payout-success').hidden = false;
       const waText = encodeURIComponent(`Halo Pardi, saya mau minta pencairan komisi afiliator (kode: ${code}).`);
-      window.open(`https://wa.me/6281200000000?text=${waText}`, '_blank', 'noopener');
+      window.open(`https://wa.me/6281212551846?text=${waText}`, '_blank', 'noopener');
     } catch (err) {
       alert('Gagal mengirim permintaan, coba lagi ya.');
     }

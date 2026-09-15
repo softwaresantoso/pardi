@@ -9,6 +9,10 @@ service cloud.firestore {
     }
 
     // ---------- Admin membership ----------
+    // Cuma bisa dibaca oleh pemiliknya sendiri (untuk cek status admin dari
+    // client). Penulisan sengaja diblokir total — UID admin pertama HARUS
+    // ditambahkan manual lewat Firebase Console, supaya tidak ada jalan bagi
+    // siapa pun untuk self-promote jadi admin dari browser.
     match /admins/{uid} {
       allow read: if request.auth != null && request.auth.uid == uid;
       allow write: if false;
@@ -23,11 +27,22 @@ service cloud.firestore {
 
     // ---------- Referral dari form kontak (kontak.html) ----------
     match /referrals/{id} {
+      // Pengunjung website belum tentu login, jadi create dibuka publik.
+      // Catatan: ini berarti tidak ada validasi anti-spam otomatis di sisi
+      // rules — kalau nanti disalahgunakan, pertimbangkan tambah App Check
+      // atau reCAPTCHA di form kontak.
       allow create: if true;
+
+      // Afiliator cuma boleh baca referral miliknya sendiri; admin boleh
+      // baca semua.
       allow read: if isAdmin() || (
         request.auth != null &&
         get(/databases/$(database)/documents/affiliates/$(request.auth.uid)).data.code == resource.data.code
       );
+
+      // Update status/komisi cuma boleh dari admin (lewat panel admin.html),
+      // supaya afiliator tidak bisa ubah status closing atau nominal komisi
+      // sendiri.
       allow update: if isAdmin();
       allow delete: if false;
     }
