@@ -87,6 +87,7 @@ var __refCode = '';
         clientName: fields.nama.value.trim(),
         businessName: fields.usaha.value.trim(),
         businessType: fields.jenis.value,
+        layanan: 'Pardi (khusus UMKM)',
         message: fields.pesan.value.trim(),
         status: 'baru',
         commissionAmount: 0,

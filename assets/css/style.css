@@ -283,3 +283,10 @@ section{padding:72px 0;}
 .aff-payout-box{background:var(--paper); border:1px solid var(--border); border-radius:var(--radius-md); padding:20px; margin-top:24px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px;}
 .aff-payout-box p{margin:0; font-size:.88rem; color:var(--ink-muted); max-width:38ch;}
 .aff-ref-badge{display:inline-flex; align-items:center; gap:8px; background:var(--amber-100); color:#92600A; border-radius:999px; padding:8px 16px; font-size:.85rem; font-weight:600; margin-bottom:16px;}
+
+/* ---------- Parent brand strip ---------- */
+.brand-strip{background:var(--navy-900); padding:7px 0;}
+.brand-strip .wrap{display:flex; align-items:center; justify-content:center; gap:6px;}
+.brand-strip a{color:rgba(255,255,255,.85); font-size:.78rem; font-weight:500; display:inline-flex; align-items:center; gap:6px;}
+.brand-strip a:hover{color:#fff;}
+.brand-strip .dot{width:4px; height:4px; border-radius:50%; background:var(--amber-500);}
