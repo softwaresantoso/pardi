@@ -154,7 +154,20 @@ function attachAdminData() {
       });
     });
 
-  admUnsub.push(affUnsub, refUnsub, payoutUnsub);
+  const prospekBadgeUnsub = affDb.collection('assessments')
+    .where('status', '==', 'baru')
+    .where('deleted', '==', false)
+    .onSnapshot((snap) => {
+      const badge = document.getElementById('adm-prospek-badge');
+      if (snap.size > 0) {
+        badge.textContent = snap.size;
+        badge.hidden = false;
+      } else {
+        badge.hidden = true;
+      }
+    }, () => { /* koleksi assessments mungkin belum ada index, abaikan */ });
+
+  admUnsub.push(affUnsub, refUnsub, payoutUnsub, prospekBadgeUnsub);
 }
 
 function renderReferrals() {

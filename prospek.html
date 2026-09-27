@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prospek Masuk — Pardi</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="assets/icons/favicon-32.png" sizes="32x32">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap nav">
+    <a href="index.html" class="nav-logo"><img src="assets/img/logo-pardi-navy.png" alt="Pardi"></a>
+    <nav class="nav-links" id="nav-links">
+      <a href="admin.html">← Panel Admin</a>
+    </nav>
+    <div class="nav-cta">
+      <button class="nav-toggle" aria-label="Buka menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div id="pr-screen-loading" class="loading-state" style="text-align:center; padding:60px; color:var(--ink-muted);">
+  <p>Memuat...</p>
+</div>
+
+<div id="pr-screen-auth" class="aff-auth-card" hidden>
+  <h2>Masuk Admin</h2>
+  <p class="sub">Khusus pemilik Pardi.</p>
+  <form id="pr-auth-form" novalidate>
+    <div class="field">
+      <label for="pr-email">Email</label>
+      <input type="email" id="pr-email" autocomplete="email">
+    </div>
+    <div class="field">
+      <label for="pr-password">Password</label>
+      <input type="password" id="pr-password" autocomplete="current-password">
+    </div>
+    <p class="field-error" style="display:block;" id="pr-auth-error"></p>
+    <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;">Masuk</button>
+  </form>
+</div>
+
+<div id="pr-screen-denied" class="aff-auth-card" hidden>
+  <h2>Bukan akun admin</h2>
+  <p class="sub">Akun ini belum terdaftar sebagai admin. Tambahkan UID-nya ke koleksi <code>admins</code> lewat Firebase Console.</p>
+  <button class="btn btn-outline" id="pr-back-btn" style="width:100%; justify-content:center;">Kembali ke halaman masuk</button>
+</div>
+
+<div id="pr-screen-dashboard" hidden>
+  <div class="pr-wrap">
+    <div class="aff-topbar">
+      <h2>Prospek Masuk</h2>
+      <button class="logout" id="pr-logout-btn">Keluar</button>
+    </div>
+
+    <div class="pr-stat-grid">
+      <div class="pr-stat"><p class="l">Baru</p><p class="v" id="pr-stat-baru">0</p></div>
+      <div class="pr-stat"><p class="l">Follow-up</p><p class="v" id="pr-stat-followup">0</p></div>
+      <div class="pr-stat"><p class="l">Deal</p><p class="v" id="pr-stat-deal">0</p></div>
+      <div class="pr-stat"><p class="l">Batal</p><p class="v" id="pr-stat-batal">0</p></div>
+      <div class="pr-stat"><p class="l">Total</p><p class="v" id="pr-stat-total">0</p></div>
+    </div>
+
+    <div class="pr-filters">
+      <input type="search" id="pr-search" placeholder="Cari nama klien / jenis usaha...">
+      <select id="pr-filter-status">
+        <option value="">Semua status</option>
+        <option value="baru">Baru</option>
+        <option value="follow_up">Follow-up</option>
+        <option value="deal">Deal</option>
+        <option value="batal">Batal</option>
+      </select>
+      <select id="pr-filter-paket">
+        <option value="">Semua paket</option>
+        <option value="Starter">Starter</option>
+        <option value="Custom Flow">Custom Flow</option>
+        <option value="Full Custom">Full Custom</option>
+      </select>
+      <select id="pr-filter-affiliate">
+        <option value="">Semua afiliator</option>
+      </select>
+      <input type="date" id="pr-filter-date-from">
+      <input type="date" id="pr-filter-date-to">
+      <button type="button" class="btn btn-outline" id="pr-export-btn">Ekspor CSV</button>
+    </div>
+
+    <table class="pr-table" id="pr-table">
+      <thead>
+        <tr><th>Klien</th><th>Usaha</th><th>Paket</th><th>Estimasi</th><th>Afiliator</th><th>Masuk</th><th>Status</th></tr>
+      </thead>
+      <tbody id="pr-tbody"></tbody>
+    </table>
+    <div class="as-empty" id="pr-empty" hidden>Belum ada prospek masuk.</div>
+  </div>
+</div>
+
+<div class="pr-detail-backdrop" id="pr-detail-backdrop" hidden>
+  <div class="pr-detail">
+    <button type="button" class="close" id="pr-detail-close">✕</button>
+    <h3 id="pr-detail-title">—</h3>
+    <p class="muted" id="pr-detail-sub" style="font-size:.85rem;">—</p>
+
+    <pre id="pr-detail-summary"></pre>
+
+    <div class="field">
+      <label>Status</label>
+      <select id="pr-detail-status">
+        <option value="baru">Baru</option>
+        <option value="follow_up">Follow-up</option>
+        <option value="deal">Deal</option>
+        <option value="batal">Batal</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Catatan owner</label>
+      <textarea id="pr-detail-note" placeholder="Catatan internal soal prospek ini..."></textarea>
+    </div>
+
+    <div class="pr-detail-actions">
+      <button type="button" class="btn btn-primary" id="pr-detail-save">Simpan perubahan</button>
+      <a class="btn btn-outline" id="pr-detail-wa" href="#" target="_blank" rel="noopener">Chat klien</a>
+      <button type="button" class="btn btn-outline" id="pr-detail-copy">Salin ringkasan</button>
+      <button type="button" class="btn-text" id="pr-detail-delete" style="color:#B42318;">Hapus prospek</button>
+    </div>
+
+    <p class="as-group-title" style="margin-top:16px;">Riwayat status</p>
+    <div class="pr-history-log" id="pr-detail-history"></div>
+  </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
+<script src="assets/js/firebase-config.js"></script>
+<script src="assets/js/prospek.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

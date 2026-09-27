@@ -47,6 +47,29 @@ service cloud.firestore {
       allow delete: if false;
     }
 
+    function isApprovedAffiliate() {
+      return request.auth != null &&
+        get(/databases/$(database)/documents/affiliates/$(request.auth.uid)).data.status == 'active';
+    }
+
+    // ---------- Asesmen kebutuhan klien (Tool Asesmen) ----------
+    match /assessments/{id} {
+      // Hanya afiliator aktif yang boleh membuat, dan hanya atas namanya
+      // sendiri, dengan status awal "baru" dan belum dihapus.
+      allow create: if isApprovedAffiliate()
+        && request.resource.data.affiliateUid == request.auth.uid
+        && request.resource.data.status == 'baru'
+        && request.resource.data.deleted == false;
+
+      // Afiliator cuma boleh baca asesmen miliknya sendiri; admin boleh
+      // baca semua.
+      allow read: if isAdmin() || (request.auth != null && resource.data.affiliateUid == request.auth.uid);
+
+      // Ubah status/catatan owner dan hapus (soft delete) cuma boleh admin —
+      // afiliator tidak boleh mengubah asesmen setelah dibuat.
+      allow update, delete: if isAdmin();
+    }
+
     // ---------- Permintaan pencairan komisi ----------
     match /payoutRequests/{id} {
       allow create: if request.auth != null && request.auth.uid == request.resource.data.uid;

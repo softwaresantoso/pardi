@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tool Asesmen — Pardi</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+<link rel="icon" href="assets/icons/favicon-32.png" sizes="32x32">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<div class="brand-strip"><div class="wrap"><a href="https://santosoft-website.pages.dev" target="_blank" rel="noopener">Bagian dari SantoSoft <span class="dot"></span> Solusi Digital untuk Bisnis Anda</a></div></div>
+<header class="site-header">
+  <div class="wrap nav">
+    <a href="index.html" class="nav-logo"><img src="assets/img/logo-pardi-navy.png" alt="Pardi"></a>
+    <nav class="nav-links" id="nav-links">
+      <a href="afiliator.html">← Kembali ke Dashboard Afiliator</a>
+    </nav>
+    <div class="nav-cta">
+      <button class="nav-toggle" aria-label="Buka menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div id="as-screen-loading" class="loading-state" style="text-align:center; padding:60px; color:var(--ink-muted);">
+  <p>Memuat...</p>
+</div>
+
+<div id="as-screen-denied" class="aff-auth-card" hidden>
+  <h2>Belum bisa diakses</h2>
+  <p class="sub" id="as-denied-reason">—</p>
+  <a class="btn btn-primary" href="afiliator.html" style="width:100%; justify-content:center;">Ke halaman Afiliator</a>
+</div>
+
+<main id="as-screen-app" hidden>
+  <div class="as-shell">
+    <h1 style="font-size:1.4rem; margin-bottom:4px;">Tool Asesmen Kebutuhan Klien</h1>
+    <p class="muted" style="font-size:.9rem; margin-bottom:20px;">Isi bersama calon klien untuk menentukan paket yang cocok dan estimasi biaya.</p>
+
+    <div class="as-tabs">
+      <button class="as-tab active" data-tab="form">Buat Asesmen</button>
+      <button class="as-tab" data-tab="riwayat">Riwayat Asesmen Saya</button>
+    </div>
+
+    <!-- ===== TAB: FORM ===== -->
+    <div class="as-tabpanel" id="as-panel-form">
+      <div style="display:grid; grid-template-columns:1.3fr 1fr; gap:20px; align-items:start;">
+        <div>
+          <form id="as-form" onsubmit="return false;">
+
+            <div class="as-card">
+              <h3>Data klien</h3>
+              <div class="as-field">
+                <label for="as-client-name">Nama klien / usaha *</label>
+                <input type="text" id="as-client-name" placeholder="Contoh: Kedai Kopi Barokah">
+              </div>
+              <div class="as-field">
+                <label for="as-client-business">Jenis usaha *</label>
+                <input type="text" id="as-client-business" placeholder="Contoh: kedai kopi, barbershop">
+              </div>
+              <div class="as-field">
+                <label for="as-client-phone">Kontak klien / WhatsApp</label>
+                <input type="text" id="as-client-phone" placeholder="08xxxxxxxxxx">
+              </div>
+              <div class="as-field">
+                <label for="as-client-note">Masalah utama menurut klien</label>
+                <textarea id="as-client-note" placeholder="Contoh: sering selisih stok, pesanan lewat WA manual"></textarea>
+              </div>
+              <div class="as-field">
+                <label>Diajukan oleh</label>
+                <input type="text" id="as-affiliate-name" readonly>
+              </div>
+              <div class="as-field">
+                <label>Kode referral</label>
+                <input type="text" id="as-affiliate-code" readonly>
+              </div>
+            </div>
+
+            <div class="as-card">
+              <h3>Pertanyaan asesmen</h3>
+
+              <p class="as-group-title">1. Kebutuhan dasar</p>
+              <div class="as-check-group" id="as-group-basic"></div>
+
+              <p class="as-group-title">2. Alur khusus di luar modul dasar</p>
+              <div class="as-check-group" id="as-group-custom"></div>
+
+              <p class="as-group-title">3. Integrasi & kebutuhan lanjutan</p>
+              <div class="as-check-group" id="as-group-integrations"></div>
+
+              <p class="as-group-title">4. Jumlah lokasi / cabang</p>
+              <div class="as-check-group" id="as-group-branches"></div>
+
+              <p class="as-group-title">5. Jumlah jenis pengguna</p>
+              <div class="as-check-group" id="as-group-userTypes"></div>
+
+              <p class="as-group-title">6. Seberapa jelas alur bisnis klien?</p>
+              <div class="as-check-group" id="as-group-clarity"></div>
+            </div>
+          </form>
+        </div>
+
+        <div class="as-result-panel" id="as-result-panel">
+          <div class="as-card">
+            <h3>Hasil rekomendasi</h3>
+            <span class="as-badge" id="as-result-package">—</span>
+            <div class="as-result-row"><span class="l">Estimasi biaya</span><span class="v" id="as-result-cost">—</span></div>
+            <div class="as-result-row"><span class="l">Durasi</span><span class="v" id="as-result-duration">—</span></div>
+            <div class="as-result-row"><span class="l">Layanan</span><span class="v" id="as-result-service">—</span></div>
+            <p class="as-group-title" style="margin-top:14px;">Alasan</p>
+            <ul class="as-reasons" id="as-result-reasons"></ul>
+            <p class="as-warning" id="as-result-warning" hidden></p>
+
+            <div class="as-actions">
+              <button type="button" class="btn btn-primary" id="as-btn-save">Simpan &amp; kirim ke Owner</button>
+              <button type="button" class="btn btn-outline" id="as-btn-copy">Salin ringkasan</button>
+              <button type="button" class="btn btn-outline" id="as-btn-wa">Kirim ke SantoSoft via WhatsApp</button>
+              <button type="button" class="btn-text" id="as-btn-new">Asesmen baru</button>
+            </div>
+            <p class="as-form-error" id="as-form-error"></p>
+            <p class="as-save-success" id="as-save-success">Tersimpan! Cek tab Riwayat untuk lihat statusnya.</p>
+            <p class="muted" style="font-size:.76rem; margin-top:14px;">Estimasi indikatif, bukan penawaran final. Harga akhir ditentukan SantoSoft.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== TAB: RIWAYAT ===== -->
+    <div class="as-tabpanel" id="as-panel-riwayat" hidden>
+      <table class="as-history-table" id="as-history-table">
+        <thead><tr><th>Klien</th><th>Jenis usaha</th><th>Paket</th><th>Tanggal</th><th>Status</th></tr></thead>
+        <tbody id="as-history-tbody"></tbody>
+      </table>
+      <div class="as-empty" id="as-history-empty">Belum ada asesmen yang kamu buat.</div>
+    </div>
+
+  </div>
+
+  <div class="as-mobile-bar" id="as-mobile-bar" hidden>
+    <span>Rekomendasi: <strong id="as-mobile-bar-package">—</strong></span>
+    <button type="button" id="as-mobile-bar-btn">Lihat hasil</button>
+  </div>
+</main>
+
+<div class="as-modal-backdrop" id="as-detail-modal" hidden>
+  <div class="as-modal">
+    <button type="button" id="as-detail-close" class="btn-text" style="float:right; padding:0;">✕</button>
+    <h3>Detail Asesmen</h3>
+    <pre id="as-detail-content"></pre>
+  </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
+<script src="assets/js/firebase-config.js"></script>
+<script src="assets/js/assessmentConfig.js"></script>
+<script src="assets/js/assessment.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
